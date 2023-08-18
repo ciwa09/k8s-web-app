@@ -245,10 +245,13 @@ namespace: frontend
 
 ```
 
-***e. Deploy the application into a service mesh ***
- - I dont have working experience with service mesh setup. But, i have setup at my home and played with it. 
+---
 
- - What Does a Service Mesh Do?
+***e. Deploy the application into a service mesh ***
+
+- I dont have working experience with service mesh setup. But, i have setup at my home and played with it. 
+
+- What Does a Service Mesh Do?
     A service mesh uses a proxy (or sidecar) that sides alongside each service. This sidecar is responsible for routing requests from one service to the sidecar in another service. As a result of this nature, service mesh makes collecting metrics and detecting issues easier.
 
     The following list shows some of the things you can use a service mesh for in your application:

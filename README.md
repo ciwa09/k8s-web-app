@@ -51,8 +51,8 @@ Kubernetes and satisfies the following requirements**
 ***a. An application that returns some data to https requests***
 
 - Wrote a simple weapp using nodejs with the help of google (I dont have much experience with application development).
-- Containerized the app and the dockerfile can be found [here](https://github.com/ciwa09/k8s-web-app/Dockerfile)
-- Applying these [manifests](https://github.com/ciwa09/k8s-web-app/k8s/manifests) should bring up the application.
+- Containerized the app and the dockerfile can be found [here](https://github.com/ciwa09/k8s-web-app/blob/main/Dockerfile)
+- Applying these [manifests](https://github.com/ciwa09/k8s-web-app/tree/main/k8s/manifests) should bring up the application.
 ```
 # k apply -f manifests/namespace.yaml
   namespace/frontend created
@@ -160,7 +160,7 @@ web-app   3/3     3            3           25s
 ---
 
 ***d. Securely stores and accesses its web security certificate (this cert can be any dummy file)***
-- i have not completed this task practically as i dont have a DNS name which is required by the ingress to setup TLS. Included the tls secret and ingress manifests in the [manifests](https://github.com/ciwa09/k8s-web-app/k8s/manifests) folder.
+- i have not completed this task practically as i dont have a DNS name which is required by the ingress to setup TLS. Included the tls secret and ingress manifests in the [manifests](https://github.com/ciwa09/k8s-web-app/tree/main/k8s/manifests) folder.
 - You can secure an application running on Kubernetes by creating a secret that contains a TLS private key and certificate.Currently, Ingress supports a single TLS port, 443, and assumes TLS termination. Any request post ingress controller are all private and not accessible as all the services and pods will be in a different network. 
 
 ### Bonus:
@@ -203,7 +203,7 @@ web-app-pdb   N/A             1                 1                     79m
 
 ***d. Organize Kubernetes resource manifests using Kustomize and/or Helm***
 
-- Helm chart can be found here: [Helm Chart](https://github.com/ciwa09/k8s-web-app/charts/web-app)
+- Helm chart can be found here: [Helm Chart](https://github.com/ciwa09/k8s-web-app/tree/main/charts/web-app)
 ```
 # k delete -f k8s/manifests
 deployment.apps "web-app" deleted
@@ -268,3 +268,6 @@ web-app-796b9b7496-rrkhq   2/2     Running   0          2m27s
 web-app-796b9b7496-ngjxj   2/2     Running   0          2m27s
 web-app-796b9b7496-wz9fp   2/2     Running   0          2m27s
 ```
+
+# Question 2
+[Documented here](https://github.com/ciwa09/k8s-web-app/blob/main/terraform/README.md)

@@ -247,7 +247,7 @@ namespace: frontend
 
 ---
 
-***e. Deploy the application into a service mesh ***
+***e. Deploy the application into a service mesh***
 
 - I dont have working experience with service mesh setup. But, i have setup at my home and played with it. 
 

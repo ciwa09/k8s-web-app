@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "web-app.fullname" . }}-pdb
+  namespace: {{ .Values.namespace }}
+  labels:
+  {{- include "web-app.labels" . | nindent 4 }}
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: web-app

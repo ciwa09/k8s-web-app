@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "web-app.fullname" . }}-ingress
+  namespace: {{ .Values.namespace }}
+  labels:
+  {{- include "web-app.labels" . | nindent 4 }}
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: web-app.default.svc.cluster.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: '{{ include "web-app.fullname" . }}-app'
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - web-app.default.svc.cluster.local
+    secretName: web-tls

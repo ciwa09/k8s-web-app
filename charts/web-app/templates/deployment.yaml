@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "web-app.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+  {{- include "web-app.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: web-app
+    {{- include "web-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: web-app
+      {{- include "web-app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: web-app
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /health-check
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          name: web-app
+          ports:
+          - containerPort: 8080
+          readinessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources: {}
+          volumeMounts:
+          - mountPath: /usr/src/app/data
+            name: data
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: web-app
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ include "web-app.fullname" . }}-nfs-pvc

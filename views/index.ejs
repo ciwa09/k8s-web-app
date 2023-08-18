@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Tracker</title>
+    <style>
+        body {
+        display: flex;
+        flex-direction: column; /* Display content in a column layout */
+        align-items: center;
+        justify-content: top;
+        height: 100vh;
+        font-size: 18px;
+        margin: 10px;
+        }
+        #existing-items {
+        text-align: center;
+        margin-top: 20px; /* Add some top margin for separation */
+        }
+        #items-list {
+        list-style: none;
+        padding: 0;
+        font-size: 18px; /* Adjust the font size as needed */
+        text-align: left;
+        margin-top: 10px; /* Add some top margin for separation between list items */
+        }
+        #items-list li {
+        margin-bottom: 7px; /* Add some bottom margin for separation between list items */
+        }
+    </style>
+</head>
+<body>
+    <img src="/az_logo.png" alt="Auto Zone">
+    <h1>Inventory Tracker</h1>
+    <form action="/submit" method="post">
+        <label for="itemTitle">Add Item:</label>
+        <input type="text" id="itemTitle" name="itemTitle" required><br>
+        <br>
+        <label for="itemDescription">Item Description:</label><br>
+        <textarea id="itemDescription" name="itemDescription" rows="4" cols="50" required></textarea><br>
+        <br>
+        <button type="submit">Submit Item</button>
+        <br>
+    </form>
+</body>
+  <div id="existing-items">
+    <h2>Existing Items</h2>
+    <ul id="items-list">
+      <% items.forEach(item => { %>
+        <li><b>Item: </b><%= item.title %>, <b>Description: </b><%= item.description %></li>
+      <% }); %>
+    </ul>
+  </div>
+  <form action="/clear-files" method="post">
+    <button type="submit">Clear Data</button>
+  </form>
+</html>

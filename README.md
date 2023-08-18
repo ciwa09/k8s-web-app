@@ -177,6 +177,9 @@ web-app   3/3     3            3           25s
             initialDelaySeconds: 10
             periodSeconds: 10
 ```
+
+---
+
 ***b. Automatically restarts if the application is unresponsive***
 - As we have setup livenessprobe kubernetes will automatically restart the application if it doesnt app the liveness check.
 - By default, the restartPolicy is set to Always in a pod's specification. This means that if a container becomes unresponsive or fails, it will be automatically restarted.
@@ -186,17 +189,21 @@ web-app   3/3     3            3           25s
     3 Never: Kubernetes will never automatically restart the container(s), regardless of their exit status or liveness probe results.
 Kubernetes provides mechanisms like liveness probes and the restartPolicy setting to ensure that pods remain responsive and healthy. If a pod becomes unresponsive due to a failing liveness probe or container failure, Kubernetes will restart the pod to maintain the desired state of the application.
 
+---
+
 ***c. Only one replica can be unavailable at any time***
-This setup was done using PodDisruptionBudget and setting up `maxUnavailable` to 1 which will make sure only 1 pod is unavailable at any point of time. Values for `minAvailable` or `maxUnavailable` can be expressed as integers or as a percentage. The use of maxUnavailable is recommended as it automatically responds to changes in the number of replicas of the corresponding controller.
+- This setup was done using PodDisruptionBudget and setting up `maxUnavailable` to 1 which will make sure only 1 pod is unavailable at any point of time. Values for `minAvailable` or `maxUnavailable` can be expressed as integers or as a percentage. The use of maxUnavailable is recommended as it automatically responds to changes in the number of replicas of the corresponding controller.
 ```
 # k get pdb -n frontend
 NAME          MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
 web-app-pdb   N/A             1                 1                     79m
 ```
 
+---
+
 ***d. Organize Kubernetes resource manifests using Kustomize and/or Helm***
 
-Helm chart can be found here: [Helm Chart](https://github.com/ciwa09/k8s-web-app/charts/web-app)
+- Helm chart can be found here: [Helm Chart](https://github.com/ciwa09/k8s-web-app/charts/web-app)
 ```
 # k delete -f k8s/manifests
 deployment.apps "web-app" deleted
@@ -238,7 +245,7 @@ namespace: frontend
 
 ```
 
-e. Deploy the application into a service mesh 
+***e. Deploy the application into a service mesh ***
  - I dont have working experience with service mesh setup. But, i have setup at my home and played with it. 
 
  - What Does a Service Mesh Do?

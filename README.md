@@ -271,13 +271,16 @@ web-app-796b9b7496-wz9fp   2/2     Running   0          2m27s
 # Question 2
 [Documented here](https://github.com/ciwa09/k8s-web-app/blob/main/terraform/README.md)
 
+---
 
-## Considering App Engine and Cloud Run, if the application is required to be multi-regional which service would you recommend? Explain.
+**Considering App Engine and Cloud Run, if the application is required to be multi-regional which service would you recommend? Explain.**
 
-***For a multi-regional application, both Google App Engine and Google Cloud Run can be viable options. If you prioritize ease of use, automatic scaling, and require minimal infrastructure management, Google App Engine might be a better fit. On the other hand, if you want more control over the runtime environment, containerization, and deployment flexibility, Google Cloud Run could be a suitable choice.***
+- ***For a multi-regional application, both Google App Engine and Google Cloud Run can be viable options. If you prioritize ease of use, automatic scaling, and require minimal infrastructure management, Google App Engine might be a better fit. On the other hand, if you want more control over the runtime environment, containerization, and deployment flexibility, Google Cloud Run could be a suitable choice.***
 
-## What is the recommended way to connect to CloudSQL?
-***The recommended way to connect to Google Cloud SQL (CloudSQL) is by using the Cloud SQL Proxy. The Cloud SQL Proxy provides a secure and efficient connection method that abstracts away the complexities of handling authentication, SSL/TLS encryption, and secure connections. It's designed to be versatile, easy to use, and suitable for various development environments and deployment scenarios.***
+---
+
+**What is the recommended way to connect to CloudSQL?**
+- ***The recommended way to connect to Google Cloud SQL (CloudSQL) is by using the Cloud SQL Proxy. The Cloud SQL Proxy provides a secure and efficient connection method that abstracts away the complexities of handling authentication, SSL/TLS encryption, and secure connections. It's designed to be versatile, easy to use, and suitable for various development environments and deployment scenarios.***
 
 **Advantages of using the Cloud SQL Proxy:**
 
@@ -294,6 +297,8 @@ web-app-796b9b7496-wz9fp   2/2     Running   0          2m27s
 - ***Localhost Connection: The proxy creates a local socket that your application can connect to using the standard localhost address, making integration seamless.***
 
 - ***Support for Various Languages: The proxy supports various programming languages and environments, making it suitable for different application stacks.***
+
+---
 
 **What are some challenges working with a Shared VPC?**
 
@@ -328,6 +333,8 @@ web-app-796b9b7496-wz9fp   2/2     Running   0          2m27s
 
     - ***Upgrading and Maintenance:***
         ***Keeping all projects in sync with respect to network changes, security patches, and maintenance can be more complex when dealing with multiple projects in a Shared VPC.***
+
+---
 
 **What GCP service would you use to provide WAF for a public endpoint?**
 

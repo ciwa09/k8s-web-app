@@ -53,13 +53,10 @@ nfs-client                cluster.local/nfs-subdir-external-provisioner   Delete
 - Containerized the app and the dockerfile can be found [here](https://github.com/ciwa09/k8s-web-app/blob/main/Dockerfile)
 - Applying these [manifests](https://github.com/ciwa09/k8s-web-app/tree/main/k8s/manifests) should bring up the application.
 ```
-# k apply -f manifests/namespace.yaml
-  namespace/frontend created
-
-# k apply -f manifests/
-deployment.apps/web-app created
-namespace/frontend unchanged
+# sh k8s-app-install-pv-nfs.sh
+namespace/frontend created
 persistentvolumeclaim/nfs-pvc created
+deployment.apps/web-app created
 poddisruptionbudget.policy/web-app-pdb created
 service/web-app created
 ingress.networking.k8s.io/web-app-ingress created
@@ -204,19 +201,21 @@ web-app-pdb   N/A             1                 1                     79m
 
 - Helm chart can be found here: [Helm Chart](https://github.com/ciwa09/k8s-web-app/tree/main/charts/web-app)
 ```
-# k delete -f k8s/manifests
+# sh k8s-app-delete-pv-nfs.sh
 deployment.apps "web-app" deleted
-namespace "frontend" deleted
-persistentvolumeclaim "nfs-pvc" deleted
 poddisruptionbudget.policy "web-app-pdb" deleted
 service "web-app" deleted
 ingress.networking.k8s.io "web-app-ingress" deleted
 secret "web-tls" deleted
+persistentvolumeclaim "nfs-pvc" deleted
+namespace "frontend" deleted
 
 # cd charts
-
 # pwd
 /Users/sivavaka/github/k8s-web-app/charts
+
+# k create ns frontend
+namespace/frontend created
 
 # helm install web-app web-app
 W0818 03:41:45.031625   18419 warnings.go:70] tls: failed to find any PEM data in certificate input
@@ -227,20 +226,30 @@ STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 
-# helm ls
-NAME                           	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART                                 	APP VERSION
-nfs-subdir-external-provisioner	default  	1       	2023-08-17 16:21:14.064659 -0700 PDT	deployed	nfs-subdir-external-provisioner-4.0.18	4.0.2
-nginx-ingress                  	default  	1       	2023-08-17 22:38:07.805979 -0700 PDT	deployed	nginx-ingress-0.18.1                  	3.2.1
-web-app                        	default  	1       	2023-08-18 03:59:19.516166 -0700 PDT	deployed	web-app-0.1.0                         	0.1.0
+# helm ls -n frontend
+NAME   	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART        	APP VERSION
+web-app	frontend 	1       	2023-08-19 01:22:33.744067 -0700 PDT	deployed	web-app-0.1.0	0.1.0
 
-$ helm get values web-app -a
+$ helm get values web-app -a -n frontend
 COMPUTED VALUES:
 image:
   repository: ciwa09/k8s-web-app
   tag: v1
 imagePullPolicy: Always
 namespace: frontend
-....
+pvc:
+  nfsPvc:
+    storageClass: nfs-client
+    storageRequest: 1Gi
+replicas: 3
+svc:
+  ports:
+  - nodePort: 30001
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  type: NodePort
+...
 
 ```
 

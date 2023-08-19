@@ -16,7 +16,6 @@ spec:
       containers:
         - name: web-app
           image: ciwa09/k8s-web-app:v1
-          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           readinessProbe:

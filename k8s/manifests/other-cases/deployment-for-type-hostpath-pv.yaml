@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: frontend
+  name: web-app
+spec:
+  replicas: 1 # if we want multiple replicas we need set up nodeselector in spec as all the pods can share the hostpath.
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      #nodeSelector: # this is needed if we mant multiple replicas as we want all the pods to be in same node because of hostpath pv
+      #  testkey: testvalue
+      containers:
+        - name: web-app
+          image: ciwa09/k8s-web-app:v1
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /health-check
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 5
+          volumeMounts:
+            - name: data
+              mountPath: /usr/src/app/data
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: web-app
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hostpath-pvc

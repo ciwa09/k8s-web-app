@@ -45,8 +45,7 @@ nfs-client                cluster.local/nfs-subdir-external-provisioner   Delete
 ---
 
 ## Questions
-**Create a simple application using any language of your choice that can be deployed to
-Kubernetes and satisfies the following requirements**
+**Create a simple application using any language of your choice that can be deployed to Kubernetes and satisfies the following requirements**
 
 ***a. An application that returns some data to https requests***
 
@@ -271,3 +270,65 @@ web-app-796b9b7496-wz9fp   2/2     Running   0          2m27s
 
 # Question 2
 [Documented here](https://github.com/ciwa09/k8s-web-app/blob/main/terraform/README.md)
+
+
+## Considering App Engine and Cloud Run, if the application is required to be multi-regional which service would you recommend? Explain.
+
+***For a multi-regional application, both Google App Engine and Google Cloud Run can be viable options. If you prioritize ease of use, automatic scaling, and require minimal infrastructure management, Google App Engine might be a better fit. On the other hand, if you want more control over the runtime environment, containerization, and deployment flexibility, Google Cloud Run could be a suitable choice.***
+
+## What is the recommended way to connect to CloudSQL?
+***The recommended way to connect to Google Cloud SQL (CloudSQL) is by using the Cloud SQL Proxy. The Cloud SQL Proxy provides a secure and efficient connection method that abstracts away the complexities of handling authentication, SSL/TLS encryption, and secure connections. It's designed to be versatile, easy to use, and suitable for various development environments and deployment scenarios.***
+
+**Advantages of using the Cloud SQL Proxy:**
+
+- ***Security: The Cloud SQL Proxy establishes secure connections to your Cloud SQL instance using SSL/TLS encryption. It ensures that your data remains encrypted during transit.***
+
+- ***Authentication: The proxy handles authentication, reducing the risk of exposing database credentials. This simplifies your application's connection code and enhances security.***
+
+- ***Flexibility: The Cloud SQL Proxy can be used locally on your development machine, on virtual machines, and even within containerized environments like Kubernetes.***
+
+- ***Connection Pooling: The proxy provides efficient connection pooling, reducing the overhead of creating new connections for each database request.***
+
+- ***IP Whitelisting Bypass: The proxy allows you to bypass IP whitelisting requirements, which can be helpful in dynamic IP environments.***
+
+- ***Localhost Connection: The proxy creates a local socket that your application can connect to using the standard localhost address, making integration seamless.***
+
+- ***Support for Various Languages: The proxy supports various programming languages and environments, making it suitable for different application stacks.***
+
+**What are some challenges working with a Shared VPC?**
+
+- ***Working with a Shared Virtual Private Cloud (VPC) in Google Cloud Platform (GCP) offers several benefits, such as resource sharing and network isolation. However, there are also challenges that come with managing and using a Shared VPC:***
+
+    - ***Complex Setup and Management:***
+        ***Setting up a Shared VPC requires careful planning and configuration. You need to define the host and service projects, IAM roles, firewall rules, and other networking components. Managing the relationships between projects can become complex as the number of projects and resources increases.***
+
+    - ***Dependency on Networking Team:***
+        ***Implementing and managing a Shared VPC often involves collaboration with networking teams to ensure proper network design, addressing, routing, and firewall configurations. This can introduce dependencies and potential delays.***
+
+    - ***Cross-Project Communication:***
+        ***While a Shared VPC facilitates cross-project communication, establishing and maintaining secure communication between projects might require additional configuration, especially when dealing with firewall rules, VPNs, or interconnects.***
+
+    - ***IAM and Permissions:***
+        ***Managing Identity and Access Management (IAM) roles and permissions across multiple projects can be challenging. Ensuring that users have the right level of access without overexposing resources requires careful role assignment.***
+
+    - ***Resource Organization:***
+        ***As multiple projects share the same network resources, keeping track of which resources belong to which projects can become complex. Proper naming conventions and tagging are essential.***
+
+    - ***Network Addressing:***
+        ***Properly planning and allocating IP address ranges for each project within the Shared VPC is crucial. Poor planning can lead to IP address conflicts or inefficient address usage.***
+
+    - ***Resource Visibility:***
+        ***In a Shared VPC, resources are spread across multiple projects, which can make it harder to gain a unified view of your infrastructure. Monitoring and managing resources might require tools that can handle cross-project visibility.***
+
+    - ***Resource Quotas and Limits:***
+        ***Cloud resource quotas and limits are applied per project, so you need to consider how these quotas will be shared across the projects in the Shared VPC.***
+
+    - ***Deployment and Automation:***
+        ***Deploying resources across different projects can be more challenging than within a single project. Automating deployments and ensuring consistency requires well-defined workflows and tools.***
+
+    - ***Upgrading and Maintenance:***
+        ***Keeping all projects in sync with respect to network changes, security patches, and maintenance can be more complex when dealing with multiple projects in a Shared VPC.***
+
+**What GCP service would you use to provide WAF for a public endpoint?**
+
+- ***To provide Web Application Firewall (WAF) protection for a public endpoint in Google Cloud Platform (GCP), you can use the "Google Cloud Armor" service. Google   Cloud Armor is a fully-managed, scalable, and distributed denial-of-service (DDoS) and application defense service that helps protect your applications and services from web-based threats and attacks. By using Google Cloud Armor, you can protect your public endpoints from common web application threats like SQL injection, cross-site scripting (XSS) attacks, and more. It also helps protect against DDoS attacks by inspecting and filtering traffic before it reaches your application. Also, Google Cloud Armor integrates seamlessly with Google Cloud's global network infrastructure, providing low-latency, high-performance security.***

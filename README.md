@@ -106,7 +106,8 @@ INTERNAL-IP
 192.168.1.100
 ```
 - Frontend Application
-![frontend application](https://imgtr.ee/image/XWjCv)
+![image](https://github.com/ciwa09/k8s-web-app/assets/194199/74638c06-dc70-43f9-a76d-beb6f78042d2)
+
 
 ---
 
@@ -132,7 +133,8 @@ web-app-fcf984bcb   3         3         3       10m
 
 ***c. Is able to persist data beyond the life of the application***
 - Add Data
-![Add data](https://imgtr.ee/image/XdIjW)
+![image](https://github.com/ciwa09/k8s-web-app/assets/194199/49ddbc56-8294-4c7f-a445-b8bb95dc7daf)
+
 - deleting and re-creating the app should persist data according to the design. Lets test it now.
 
 ```
@@ -151,7 +153,8 @@ NAME      READY   UP-TO-DATE   AVAILABLE   AGE
 web-app   3/3     3            3           25s
 ```
 - Data persisted beyond the app lifecycle.
-![Data persisted as we desired](https://imgtr.ee/image/XWU6F)
+![image](https://github.com/ciwa09/k8s-web-app/assets/194199/71a4ac75-03a3-4dd4-9078-cf6053c6aa00)
+
 
 ---
 

@@ -8,5 +8,8 @@
 - Tested creating and destroying pub/sub topics using this terraform code.
 - Included `terraform state list` in this repo for verification.
 - GCS terraform state shown below.
-![image](https://github.com/ciwa09/k8s-web-app/assets/194199/3dd9eebc-4129-46d9-b962-ec5efa24a5f0)
-![image](https://github.com/ciwa09/k8s-web-app/assets/194199/eef25901-f14d-45e6-91bb-ce160cbe283b)
+  
+![image](https://github.com/ciwa09/k8s-web-app/assets/194199/1d848eb6-2335-4d1a-84d5-30342e77625a)
+
+![image](https://github.com/ciwa09/k8s-web-app/assets/194199/d3b3ed28-c5ba-43fe-bf69-ecc19462a366)
+

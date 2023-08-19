@@ -145,7 +145,7 @@ web-app   3/3     3            3           17m
 # k delete -f k8s/manifests/step3-deploy-app/deployment.yaml
 deployment.apps "web-app" deleted
 
-# k apply -f manifests/deployment.yaml
+# k apply -f k8s/manifests/step3-deploy-app/deployment.yaml
 deployment.apps/web-app created
 
 # k get deploy -n frontend
